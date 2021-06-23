@@ -2,6 +2,7 @@ import telebot
 from telebot import TeleBot, types
 from hola import TOKEN
 import DBRec
+import buttons
 
 bot: TeleBot = telebot.TeleBot(TOKEN)
 
@@ -26,10 +27,7 @@ def bot_message(message):
 		button6 = types.KeyboardButton('НАЗАД')
 		markup.add(button1, button2, button3, button4, button5, button6)
 		bot.reply_to(message, "Выберите услугу", reply_markup = markup)
-
-@bot.message_handler(content_types = ['text'])
-def bot_message(message):
-	if message.text == 'Маникюр' or 'Педикюр' or 'Макияж' or 'Наращивание' or 'Стрижка':
+	elif message.text in buttons.buttons_list:
 		markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
 		button1 = types.KeyboardButton('Маникюр')
 		button2 = types.KeyboardButton('Педикюр')
